@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>#youtubedaemeksizlereyeryok</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #030a03;
+            color: #00ff66;
+            font-family: 'Courier New', Courier, monospace;
+            padding: 20px 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-shadow: 0 0 5px rgba(0, 255, 102, 0.4);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            background: #051205;
+            padding: 25px 20px;
+            border-radius: 8px;
+            border: 1px solid #00ff66;
+            box-shadow: 0 0 15px rgba(0, 255, 102, 0.2);
+        }
+
+        header h1 {
+            color: #00ff66;
+            font-size: 15px;
+            margin-bottom: 8px;
+            word-break: break-word;
+            text-shadow: 0 0 8px #00ff66;
+            text-align: center;
+        }
+
+        .subtitle {
+            color: #00aa44;
+            font-size: 12px;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+            text-align: center;
+        }
+
+        .manifesto {
+            background: #020802;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            text-align: left;
+            border-left: 3px solid #00ff66;
+            border-right: 1px solid #00220a;
+            border-top: 1px solid #00220a;
+            border-bottom: 1px solid #00220a;
+        }
+
+        .manifesto p {
+            font-size: 12px;
+            color: #00cc55;
+            line-height: 1.6;
+            margin-bottom: 12px;
+            white-space: pre-line;
+        }
+
+        .action-box {
+            background: #020802;
+            padding: 15px;
+            border: 1px dashed #00ff66;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .action-box h3 {
+            font-size: 14px;
+            margin-bottom: 12px;
+            color: #00ff66;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            background: #000;
+            border: 1px solid #00ff66;
+            color: #00ff66;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 13px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            outline: none;
+        }
+
+        input[type="text"]::placeholder {
+            color: #006622;
+        }
+
+        button {
+            background-color: #00ff66;
+            color: #030a03;
+            border: none;
+            padding: 12px 20px;
+            font-size: 13px;
+            font-weight: bold;
+            font-family: 'Courier New', Courier, monospace;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            box-shadow: 0 0 10px rgba(0, 255, 102, 0.5);
+            transition: 0.2s;
+        }
+
+        button:hover {
+            background-color: #00cc55;
+            box-shadow: 0 0 15px rgba(0, 255, 102, 0.8);
+        }
+
+        button:disabled {
+            background-color: #003311;
+            color: #006622;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        #counterText {
+            margin-top: 12px;
+            font-size: 12px;
+            color: #00aa44;
+        }
+
+        footer {
+            margin-top: 20px;
+            font-size: 11px;
+            color: #006622;
+            text-align: center;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>#youtubedaemeksizlereyeryok</h1>
+            <p class="subtitle">&gt;&gt; DİJİTAL DİRENİŞ MERKEZİ &lt;&lt;</p>
+        </header>
+
+        <section class="manifesto">
+            <p>🚨 YOUTUBE SHORTS’TA EMEKSİZLERE SON! 🚨
+Platformu çöp içeriklerle, kopyala-yapıştır videolarla ve sadece ilgi çekmek için açılan "kanalı kapatıyorum" tiyatrolarıyla dolduranlara artık yeter diyoruz!
+Sanıyorlar ki arkalarında kimse yok, istedikleri gibi prim kasıp ortalığı kirletecekler. @Dişsizzz ve o malum konsey gibilerinin bu ucuz oyunlarına boyun eğmek yok! YouTube Shorts'u gerçekten emek veren, ter döken içerik üreticilerine geri almanın vakti geldi.
+📢 HEDEFTE KİM VAR? Emek hırsızları, primciler ve dijital kalabalık yaratanlar.
+🔥 NE YAPIYORUZ?
+Bu zihniyete geçit vermiyor, #youtubedaemeksizlereyeryok etiketiyle her yerde sesimizi duyuruyoruz. Kendi kanalını, emeğini ve kaliteni savunan herkes bu çağrıya kulak versin!
+Sessiz kalmak yok, tepkimizi gösteriyoruz. Destek verenler buraya! 🛡️👊</p>
+        </section>
+
+        <section class="action-box">
+            <h3>// İMZA KAMPANYASI</h3>
+            <input type="text" id="signerName" placeholder="Adınızı veya Rumuzunuzu Girin...">
+            <button id="signBtn" onclick="addSignature()">DESTEK VER VE İMZALA ⚡</button>
+            <p id="counterText">Toplam İmza: <span id="count">1453</span></p>
+        </section>
+
+        <footer>
+            <p>(Adminin notu: @mucitmuhammet adlı YouTube hesabı bana ait ayrıca @mucitmuhammed adlı insta sayfamı takip ederseniz ve benimle irtibata geçerseniz sevinirim:))</p>
+        </footer>
+    </div>
+
+    <script>
+        // Bot ve çift imza koruması (LocalStorage)
+        if (localStorage.getItem('imzaAtildi')) {
+            const btn = document.getElementById('signBtn');
+            btn.textContent = "BU CİHAZDAN İMZA ATILDI ✔";
+            btn.disabled = true;
+        }
+
+        function addSignature() {
+            const nameInput = document.getElementById('signerName');
+            const btn = document.getElementById('signBtn');
+            const countSpan = document.getElementById('count');
+
+            if (nameInput.value.trim() === "") {
+                alert("Lütfen imza için adınızı veya rumuzunuzu girin dümenci!");
+                return;
+            }
+
+            localStorage.setItem('imzaAtildi', 'true');
+
+            let currentCount = parseInt(countSpan.textContent);
+            currentCount++;
+            countSpan.textContent = currentCount;
+
+            btn.textContent = "İMZANIZ KAYDEDİLDİ 🚀";
+            btn.style.backgroundColor = "#003311";
+            btn.style.color = "#00ff66";
+            btn.disabled = true;
+            nameInput.disabled = true;
+        }
+    </script>
+</body>
+</html>
