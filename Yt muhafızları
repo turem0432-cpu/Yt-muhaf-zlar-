@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YT Muhafızları | #youtubedaemeksizlereyeryok</title>
+    <!-- Firebase Bağlantısı -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background-color: #030a03;
+            color: #00ff66;
+            font-family: 'Courier New', Courier, monospace;
+            padding: 20px 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-shadow: 0 0 5px rgba(0, 255, 102, 0.4);
+        }
+        .container {
+            width: 100%;
+            max-width: 600px;
+            background: #051205;
+            padding: 25px 20px;
+            border-radius: 8px;
+            border: 1px solid #00ff66;
+            box-shadow: 0 0 15px rgba(0, 255, 102, 0.2);
+        }
+        
+        /* HAREKETLİ GLITCH BAŞLIK EFEKTİ */
+        header h1 {
+            color: #00ff66;
+            font-size: 20px;
+            margin-bottom: 8px;
+            text-align: center;
+            position: relative;
+            animation: glitch-anim 1.5s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-anim {
+            0% {
+                transform: translate(0);
+                text-shadow: 0 0 8px #00ff66;
+            }
+            20% {
+                transform: translate(-2px, 2px);
+                text-shadow: 2px -2px 0px #ff0055, -2px 2px 0px #00ffff;
+            }
+            40% {
+                transform: translate(-2px, -2px);
+                text-shadow: -2px -2px 0px #ff0055, 2px 2px 0px #00ffff;
+            }
+            60% {
+                transform: translate(2px, 2px);
+                text-shadow: 2px 2px 0px #ff0055, -2px -2px 0px #00ffff;
+            }
+            80% {
+                transform: translate(2px, -2px);
+                text-shadow: -2px 2px 0px #ff0055, 2px -2px 0px #00ffff;
+            }
+            100% {
+                transform: translate(0);
+                text-shadow: 0 0 8px #00ff66;
+            }
+        }
+
+        .subtitle { color: #00aa44; font-size: 12px; margin-bottom: 20px; text-align: center; }
+        .manifesto {
+            background: #020802;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            border-left: 3px solid #00ff66;
+        }
+        .manifesto p { font-size: 12px; color: #00cc55; line-height: 1.6; white-space: pre-line; }
+        .action-box {
+            background: #020802;
+            padding: 15px;
+            border: 1px dashed #00ff66;
+            border-radius: 4px;
+            text-align: center;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            background: #000;
+            border: 1px solid #00ff66;
+            color: #00ff66;
+            font-family: inherit;
+            margin-bottom: 10px;
+            outline: none;
+        }
+        button {
+            background-color: #00ff66;
+            color: #030a03;
+            border: none;
+            padding: 12px 20px;
+            font-weight: bold;
+            font-family: inherit;
+            cursor: pointer;
+            width: 100%;
+            box-shadow: 0 0 10px rgba(0, 255, 102, 0.5);
+        }
+        button:disabled { background-color: #003311; color: #006622; cursor: not-allowed; }
+        #counterText { margin-top: 12px; font-size: 12px; color: #00aa44; }
+        footer { margin-top: 20px; font-size: 11px; color: #006622; text-align: center; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🛡️ YT MUHAFIZLARI 🛡️</h1>
+            <p class="subtitle">&gt;&gt; DİJİTAL DİRENİŞ MERKEZİ &lt;&lt;</p>
+        </header>
+
+        <section class="manifesto">
+            <p>🚨 YOUTUBE SHORTS’TA EMEKSİZLERE SON! 🚨
+YT Muhafızları olarak platformu çöp içeriklerle, kopyala-yapıştır videolarla ve drama tiyatrolarıyla dolduranlara artık dur diyoruz!
+@Dişsizzz ve o malum konsey gibilerinin bu ucuz oyunlarına boyun eğmek yok! YouTube Shorts'u gerçekten emek veren içerik üreticilerine geri kazandırmak için buradayız.</p>
+        </section>
+
+        <section class="action-box">
+            <h3>// DİRENİŞ İMZA KAMPANYASI</h3>
+            <input type="text" id="signerName" placeholder="Adınızı veya Rumuzunuzu Girin...">
+            <button id="signBtn" onclick="addSignature()">YT MUHAFIZLARINA KATIL VE İMZALA ⚡</button>
+            <p id="counterText">Toplam Canlı Muhafız Sayısı: <span id="count">Yükleniyor...</span></p>
+        </section>
+
+        <footer>
+            <p>(Kurucu: @mucitmuhammed / Insta: @mucitmuhammed)</p>
+        </footer>
+    </div>
+
+    <script>
+        // Firebase Yapılandırması
+        const firebaseConfig = {
+            databaseURL: "https://SİZİN_PROJECT_ID.firebaseio.com"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+
+        const countSpan = document.getElementById('count');
+        const imzaRef = database.ref('imzaSayisi');
+
+        // Canlı Sayacı Çek
+        imzaRef.on('value', (snapshot) => {
+            let count = snapshot.val() || 0;
+            countSpan.textContent = count;
+        });
+
+        if (localStorage.getItem('imzaAtildi')) {
+            const btn = document.getElementById('signBtn');
+            btn.textContent = "BU CİHAZDAN İMZA ATILDI ✔";
+            btn.disabled = true;
+        }
+
+        function addSignature() {
+            const nameInput = document.getElementById('signerName');
+            const btn = document.getElementById('signBtn');
+
+            if (nameInput.value.trim() === "") {
+                alert("Lütfen adınızı veya rumuzunuzu girin dümenci!");
+                return;
+            }
+
+            imzaRef.transaction((currentCount) => {
+                return (currentCount || 0) + 1;
+            });
+
+            localStorage.setItem('imzaAtildi', 'true');
+            btn.textContent = "MUHAFIZ LİSTESİNE EKLENDİN 🚀";
+            btn.disabled = true;
+            nameInput.disabled = true;
+        }
+    </script>
+</body>
+</html>
